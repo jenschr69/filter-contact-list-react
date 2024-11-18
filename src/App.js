@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { data } from './data.js';
 
 function App() {
-  const [contacts, setContacts] = useState(data);
+  const [products, setProducts] = useState(data);
   const [search, setSearch] = useState('');
 
   // const sortName = () => {
@@ -25,24 +25,25 @@ function App() {
   return (
     <div>
       <Container>
-        <h1 className='text-center mt-4'>Contact Keeper</h1>
+        <h1 className='text-center mt-4'>Product search</h1>
         <Form>
           <InputGroup className='my-3'>
 
             {/* onChange for search */}
             <Form.Control
               onChange={(e) => setSearch(e.target.value)}
-              placeholder='Search contacts'
+              placeholder='Search products'
             />
           </InputGroup>
         </Form>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>Product ID</th>
+              <th>Product Picture</th>
+              <th>Product Name</th>
+              <th>Product Description</th>
+              <th>Price</th>
             </tr>
           </thead>
           <tbody>
@@ -50,14 +51,15 @@ function App() {
               .filter((item) => {
                 return search.toLowerCase() === ''
                   ? item
-                  : item.first_name.toLowerCase().includes(search);
+                  : item.product_name.toLowerCase().includes(search);
               })
               .map((item, index) => (
                 <tr key={index}>
-                  <td>{item.first_name}</td>
-                  <td>{item.last_name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
+                  <td>{item.product_id}</td>
+                  <td>{item.product_image}</td>
+                  <td>{item.product_name}</td>
+                  <td>{item.product_description_short}</td>
+                  <td>{item.product_price}</td>
                 </tr>
               ))}
           </tbody>
